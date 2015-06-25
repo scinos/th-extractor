@@ -3,30 +3,28 @@ Theme Hospital Extractor
 
 Extracts the graphic assets from Bullfrog's Theme Hospital into PNG and GIF files. This package DOES NOT provide the TH binary assets, you need to get them from your TH CD-ROM. Also, you have to decompress them using the `dernc` decompressor from [http://www.yoda.arachsys.com/dk/utils.html](http://www.yoda.arachsys.com/dk/utils.html)
 
-Based on http://connection-endpoint.de/th-format-specification/
+Based on [http://connection-endpoint.de/th-format-specification/](http://connection-endpoint.de/th-format-specification/)
 
-Requires io.js, tested with version v2.2.1
-
-
+Requires io.js with ES6 flags, tested with version v2.2.1
 
 Usage
 -----
 
 1. Install all required dependencies:
-```
-npm install
-```
+    ```
+    npm install
+    ```
 
 2. Configure the path of the *uncompressed* TH binary assets. 
-```
-vi config.js
-// Edit the 'basePath' property
-```
+    ```
+    vi config.js
+    // Edit the 'basePath' property
+    ```
 
 3. Run the extactor
-```
-nmp start
-```
+    ```
+    nmp start
+    ```
 
 4. The sprites and animations will be in the `./out` directory
 
