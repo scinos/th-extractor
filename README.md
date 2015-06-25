@@ -11,20 +11,17 @@ Usage
 -----
 
 1. Install all required dependencies:
-        ```
+
         npm install
-        ```
 
 2. Configure the path of the *uncompressed* TH binary assets. 
-        ```
+
         vi config.js
         // Edit the 'basePath' property
-        ```
 
-3. Run the extactor
-        ```
+3. Run the extractor
+
         nmp start
-        ```
 
 4. The sprites and animations will be in the `./out` directory
 
