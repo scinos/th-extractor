@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "curly": false,
+        "quotes": false,
+        "no-shadow": false
+    }
+}

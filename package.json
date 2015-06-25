@@ -1,0 +1,35 @@
+{
+  "name": "th-extractor",
+  "version": "0.1.0",
+  "description": "Extracts sprites and animations from Bullfrog's Theme Hospital",
+  "keywords": ["theme hospital", "bullfrog", "th", "extractor", "ripper"],
+  "main": "extract.js",
+  "scripts": {
+    "start": "DEBUG=* node --harmony_arrow_functions --harmony_object_literals --harmony_computed_property_names --harmony_arrays --harmony_tostring extract.js"
+  },
+  "author": "Sergio Cinos <sergio.cinos@gmail.com>",
+  "license": "ISC",
+  "bugs": "https://bitbucket.org/cinos/th-extractor/issues",
+  "homepage": "https://bitbucket.org/cinos/th-extractor",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://cinos@bitbucket.org/cinos/th-extractor.git"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "fs-extra": "^0.13.0",
+    "gifencoder": "^1.0.6",
+    "pngjs": "^0.4.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "curly": false,
+      "quotes": false,
+      "no-shadow": false
+    }
+  }
+}
