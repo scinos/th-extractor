@@ -1,6 +1,6 @@
 {
   "name": "th-extractor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Extracts sprites and animations from Bullfrog's Theme Hospital",
   "keywords": ["theme hospital", "bullfrog", "th", "extractor", "ripper"],
   "main": "extract.js",
