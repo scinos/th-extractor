@@ -12,6 +12,7 @@ var offset2xy = (offset, w) => ({
     y: Math.floor((offset / 4) / w)
 });
 
+
 module.exports = class Renderer {
 
     static renderSprite(sprite, outputPath){
@@ -35,7 +36,7 @@ module.exports = class Renderer {
         });
     }
 
-    static renderAnimation(animation, outputPath) {
+    static renderAnimation(animation, outputPath, classes) {
         info(`Rendering animation: ${animation}`);
         debug(`   Output: ${outputPath}`);
         debug(`   Size: ${animation.width} x ${animation.height}`);
@@ -57,17 +58,21 @@ module.exports = class Renderer {
             gif.setDelay(1000 / 12);
 
             for(let frame of animation) {
-                gif.addFrame(module.exports.renderAnimationFrame(frame, animation.offsetX, animation.offsetY, animation.width));
+                gif.addFrame(module.exports.renderAnimationFrame(frame, animation.offsetX, animation.offsetY, animation.width, classes));
             }
             gif.finish();
         });
     }
 
-    static renderAnimationFrame(frame, offsetX, offsetY, width) {
+    static renderAnimationFrame(frame, offsetX, offsetY, width, classes) {
         let result = [];
 
-        for (let i = 0; i < frame.list.length; i++) {
-            let element = frame.list[i];
+        let elements = frame.list.filter(f => {
+            return f.layerId === 0 || f.layerId === 1 || classes[f.layerClass] === f.layerId
+        })
+
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
             let spriteBuffer = element.sprite.toBuffer();
             let spriteWidth = element.sprite.width;
             let spriteHeight = element.sprite.height;

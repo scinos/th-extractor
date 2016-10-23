@@ -1,5 +1,31 @@
 "use strict";
 
+
+function createSets(num) {
+    const out=[];
+    for (var i = 0; i<13; i++) {
+        out[i] = new Set();
+    }    
+    return out;
+}
+
+
+function combine(classes, acc=[], result=[]) {
+    if (!Array.isArray(classes[0])) {
+        acc.push(result);
+    } else if (classes[0].length === 0) {
+        let partialResult = [].concat(result).concat(undefined);
+        combine(classes.slice(1), acc, partialResult);
+    } else {
+        for (var i = 0; i<classes[0].length; i++){
+            let partialResult = [].concat(result).concat([classes[0][i]]);
+            combine(classes.slice(1), acc, partialResult);
+        }
+    }
+    return acc;
+}
+
+
 class Frame{
     constructor(list, width, height, soundIndex, flags, nextIndex) {
         this.list = list;
@@ -23,6 +49,7 @@ class Element{
 
         this.flags = layerClassAndFlags & 0xF;
         this.layerClass = layerClassAndFlags >> 4;
+        this.layerId = layerId;
 
         this.flipVertical = this.flags & 0x1;
         this.flipHorizontal = this.flags & 0x2;
@@ -76,6 +103,20 @@ class Animation{
 
     toString() {
         return `${this.name}_${this.index}`;
+    }
+
+    getClasses() {
+        let classes=createSets(13);
+
+        for(let frame of this.frames) {
+            for(let {layerId, layerClass} of frame.list) {
+                if (layerId === 0 || layerId === 1) continue;
+                classes[layerClass].add(layerId);
+            }
+        }
+
+        classes = classes.map(ids => Array.from(ids).sort((a,b)=> a-b))
+        return combine(classes);
     }
 }
 

@@ -60,28 +60,28 @@ Object.keys(animationFiles).forEach(name => {
 });
 
 Promise.resolve()
-    .then(() => {
-        let palettesPath = path.join("out/palettes");
-        fs.ensureDirSync(palettesPath);
-        return runPromisesInSeries(Object.keys(palettes).map(name => () => {
-            let filePath = path.join(palettesPath, name + ".png");
-            let palette = palettes[name];
-            return Renderer.renderSprite(palette, filePath);
-        }));
-    })
-    .then(() => {
-        let spritesPath = path.join("out/sprites");
-        fs.ensureDirSync(spritesPath);
-        return runPromisesInSeries(Object.keys(sprites).map(name => () => {
-            let spritePath = path.join(spritesPath, name);
-            fs.ensureDirSync(spritePath);
+    // .then(() => {
+    //     let palettesPath = path.join("out/palettes");
+    //     fs.ensureDirSync(palettesPath);
+    //     return runPromisesInSeries(Object.keys(palettes).map(name => () => {
+    //         let filePath = path.join(palettesPath, name + ".png");
+    //         let palette = palettes[name];
+    //         return Renderer.renderSprite(palette, filePath);
+    //     }));
+    // })
+    // .then(() => {
+    //     let spritesPath = path.join("out/sprites");
+    //     fs.ensureDirSync(spritesPath);
+    //     return runPromisesInSeries(Object.keys(sprites).map(name => () => {
+    //         let spritePath = path.join(spritesPath, name);
+    //         fs.ensureDirSync(spritePath);
 
-            return runPromisesInSeries(Array.from(sprites[name]).map((sprite, index) => () => {
-                let filePath = path.join(spritePath, name + "_" + index + ".png");
-                return Renderer.renderSprite(sprite, filePath);
-            }));
-        }));
-    })
+    //         return runPromisesInSeries(Array.from(sprites[name]).map((sprite, index) => () => {
+    //             let filePath = path.join(spritePath, name + "_" + index + ".png");
+    //             return Renderer.renderSprite(sprite, filePath);
+    //         }));
+    //     }));
+    // })
     .then(() => {
         let animationsPath = path.join("out/animations");
         fs.ensureDirSync(animationsPath);
@@ -90,9 +90,11 @@ Promise.resolve()
             let animationPath = path.join(animationsPath, name);
             fs.ensureDirSync(animationPath);
 
-            return runPromisesInSeries(Array.from(animationCollection).map((animation, index) => () => {
-                let filePath = path.join(animationPath, name + "_" + index + ".gif");
-                return Renderer.renderAnimation(animation, filePath);
+            return runPromisesInSeries(Array.from(animationCollection).slice(1,2).map((animation, index) => () => {
+                return runPromisesInSeries(animation.getClasses().map(classConfig => () => {
+                    let filePath = path.join(animationPath, name + "-" + index + "_" + classConfig.join("_") + ".gif");
+                    return Renderer.renderAnimation(animation, filePath, classConfig);
+                }));
             }));
         }));
     })
