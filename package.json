@@ -5,7 +5,7 @@
   "keywords": ["theme hospital", "bullfrog", "th", "extractor", "ripper"],
   "main": "extract.js",
   "scripts": {
-    "start": "DEBUG=* node --harmony_arrow_functions --harmony_object_literals --harmony_computed_property_names --harmony_arrays --harmony_tostring extract.js"
+    "start": "DEBUG=* node extract.js"
   },
   "author": "Sergio Cinos <sergio.cinos@gmail.com>",
   "license": "ISC",
