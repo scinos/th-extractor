@@ -55,6 +55,7 @@ module.exports = class Renderer {
 
             gif.start();
             gif.setRepeat(0);
+            gif.setQuality(1);
             gif.setDelay(1000 / 12);
 
             for(let frame of animation) {
