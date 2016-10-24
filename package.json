@@ -9,11 +9,11 @@
   },
   "author": "Sergio Cinos <sergio.cinos@gmail.com>",
   "license": "ISC",
-  "bugs": "https://bitbucket.org/cinos/th-extractor/issues",
-  "homepage": "https://bitbucket.org/cinos/th-extractor",
+  "bugs": "https://bitbucket.org/scinos/th-extractor/issues",
+  "homepage": "https://bitbucket.org/scinos/th-extractor",
   "repository" : {
     "type" : "git",
-    "url" : "https://cinos@bitbucket.org/cinos/th-extractor.git"
+    "url" : "https://cinos@bitbucket.org/scinos/th-extractor.git"
   },
   "dependencies": {
     "debug": "^2.2.0",
