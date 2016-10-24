@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
-    "fs-extra": "^0.13.0",
+    "fs-extra": "^0.30.0",
     "gif-encoder": "^0.6.0",
-    "pngjs": "^0.4.0"
+    "pngjs": "^3.0.0"
   },
   "eslintConfig": {
     "env": {
