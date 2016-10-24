@@ -5,8 +5,6 @@ Extracts the graphic assets from Bullfrog's Theme Hospital into PNG and GIF file
 
 Based on [http://connection-endpoint.de/th-format-specification/](http://connection-endpoint.de/th-format-specification/)
 
-Requires io.js with ES6 flags, tested with version v2.2.1
-
 Usage
 -----
 
@@ -28,7 +26,5 @@ Usage
 Known Bugs & Limitations
 ------------------------
 
-- Does not generate a separate sprite/animation per "variation". Example: there is only one animation for the female patient, with all the head and skin tones variations overlapped.
 - Some sprites are broken (eg: out/sprites/sprites/sprites_44.png)
-- Animations are not transparent.
 - In an animation, some sprites are meant to be rendered with 50% or 75% alpha. Right now, this is ignored.
