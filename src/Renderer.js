@@ -2,7 +2,7 @@
 
 var fs = require("fs-extra");
 var PNG = require("pngjs").PNG;
-var GIFEncoder = require('gifencoder');
+var GIFEncoder = require('gif-encoder');
 var debug = require('debug')('debug');
 var info = require('debug')('info');
 
@@ -48,25 +48,30 @@ module.exports = class Renderer {
 
             let gif = new GIFEncoder(animation.width, animation.height);
             let out = fs.createWriteStream(outputPath);
-            gif.createReadStream()
-                .on("end", resolve)
+            gif.on("end", resolve)
                 .on("error", reject)
                 .pipe(out);
 
-            gif.start();
             gif.setRepeat(0);
             gif.setQuality(1);
             gif.setDelay(1000 / 12);
+            gif.setTransparent(0xFF00FF);
+            gif.writeHeader();
+
+            let initialFrame = []
+            for (var i = 0; i < animation.width * animation.height; i++) {
+                initialFrame.push(255, 0, 255, 0);
+            }
 
             for(let frame of animation) {
-                gif.addFrame(module.exports.renderAnimationFrame(frame, animation.offsetX, animation.offsetY, animation.width, classes));
+                gif.addFrame(module.exports.renderAnimationFrame(frame, animation.offsetX, animation.offsetY, animation.width, classes, initialFrame.concat([])));
             }
             gif.finish();
         });
     }
 
-    static renderAnimationFrame(frame, offsetX, offsetY, width, classes) {
-        let result = [];
+    static renderAnimationFrame(frame, offsetX, offsetY, width, classes, initialFrame) {
+        let result = initialFrame;
 
         let elements = frame.list.filter(f => {
             return f.layerId === 0 || f.layerId === 1 || classes[f.layerClass] === f.layerId
@@ -94,7 +99,7 @@ module.exports = class Renderer {
                 result[newOffset] = spriteBuffer.readUInt8(offset);
                 result[newOffset + 1] = spriteBuffer.readUInt8(offset + 1);
                 result[newOffset + 2] = spriteBuffer.readUInt8(offset + 2);
-                result[newOffset + 3] = a;
+                result[newOffset + 3] = 255;
             }
         }
         return result;
