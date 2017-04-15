@@ -65,6 +65,7 @@ module.exports = class Renderer {
 
             for(let frame of animation) {
                 gif.addFrame(module.exports.renderAnimationFrame(frame, animation.offsetX, animation.offsetY, animation.width, classes, initialFrame.concat([])));
+                gif.flushData();
             }
             gif.finish();
         });

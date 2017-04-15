@@ -4,8 +4,8 @@
 function createSets(num) {
     const out=[];
     for (var i = 0; i<13; i++) {
-        out[i] = new Set();
-    }    
+        out[i] = new Set([0]);
+    }
     return out;
 }
 
